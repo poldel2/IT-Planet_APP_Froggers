@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="pushkin" size="1.000000 1.333333" />
+    <ImageTarget name="sTelekom" size="1.000000 1.333333" />
+    <ImageTarget name="bezTeleka" size="1.000000 1.333333" />
+    <ImageTarget name="raduga" size="1.000000 1.333333" />
+    <ImageTarget name="knopka" size="1.000000 1.333333" />
+    <ImageTarget name="room1" size="1.000000 1.333333" />
+    <ImageTarget name="hall" size="1.000000 1.333333" />
+    <ImageTarget name="bYevEOt4OGM12" size="1.000000 2.505660" />
+    <ImageTarget name="bYevEOt4OGM" size="0.100000 0.250566" />
+  </Tracking>
+</QCARConfig>
