@@ -1,44 +1,67 @@
 using UnityEngine;
-using UnityEngine.UI;
+//using LeanTweenFramework;
 
 public class MenuController : MonoBehaviour
 {
-    public GameObject MainMenu;
-    public GameObject RegisterMenu;
-    public GameObject LoginMenu;
-    public GameObject Main;
+    public RectTransform MainMenu;
+    public RectTransform RegisterMenu;
+    public RectTransform LoginMenu;
+    public RectTransform Main;
+    public RectTransform AboutProjectMenu;
+
+    private RectTransform currentMenu;
+
     void Start()
     {
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 1;
+
+        RegisterMenu.anchoredPosition = new Vector2(-Screen.width, 0);
+        LoginMenu.anchoredPosition = new Vector2(-Screen.width, 0);
+        Main.anchoredPosition = new Vector2(-Screen.width, 0);
+        AboutProjectMenu.anchoredPosition = new Vector2(-Screen.width, 0);
+
+        currentMenu = MainMenu;
         ShowMainMenu();
+    }
+
+    private void SetActiveMenu(RectTransform newMenu)
+    {
+        // Сначала показываем новое меню
+        if (currentMenu != null && currentMenu != newMenu)
+        {
+            LeanTween.moveX(newMenu, 0, 0.15f).setOnComplete(() =>
+            {
+                    // Затем скрываем старое меню
+                    LeanTween.moveX(currentMenu, -Screen.width, 0.15f);
+                    // Обновляем текущее меню
+                    currentMenu = newMenu;
+            });
+        }
     }
 
     public void OpenRegisterMenu()
     {
-        MainMenu.SetActive(false); // This will hide all the elements of MainMenu
-        LoginMenu.SetActive(false);
-        RegisterMenu.SetActive(true); // This will show all the elements of RegisterMenu
-        Main.SetActive(false);
-    }
+        SetActiveMenu(RegisterMenu);
+    }   
+
     public void ShowMainMenu()
     {
-        MainMenu.SetActive(true); // This will show all the elements of MainMenu
-        LoginMenu.SetActive(false);
-        RegisterMenu.SetActive(false); // This will hide all the elements of RegisterMenu
-        Main.SetActive(false);
-    }
-    public void ShowLoginMenu()
-    {
-        MainMenu.SetActive(false); // This will show all the elements of MainMenu
-        RegisterMenu.SetActive(false); // This will hide all the elements of RegisterMenu
-        LoginMenu.SetActive(true);
-        Main.SetActive(false);
-    }
-    public void ShowMain()
-    {
-        MainMenu.SetActive(false); // This will show all the elements of MainMenu
-        RegisterMenu.SetActive(false); // This will hide all the elements of RegisterMenu
-        LoginMenu.SetActive(false);
-        Main.SetActive(true);
+        SetActiveMenu(MainMenu);
     }
 
+    public void ShowLoginMenu()
+    {
+        SetActiveMenu(LoginMenu);
+    }
+
+    public void ShowMain()
+    {
+        SetActiveMenu(Main);
+    }
+
+    public void ShowAboutProjectMenu()
+    {
+        SetActiveMenu(AboutProjectMenu);
+    }
 }
